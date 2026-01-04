@@ -1,7 +1,20 @@
-import { app } from './server.ts';
+import { env, isDevEnv, isTestEnv } from "../env.ts"
 
-app.listen(3300, () => {
-  console.log('Server Connected successfully on port 3300')
+import { app } from "./server.ts"
+
+app.listen(env.PORT, () => {
+  console.log("--- SERVER IS STARTING UP ---");
+
+  console.log(`The server is listening on Port: ${env.PORT}`)
+  console.log(`Environment: ${env.APP_STAGE}`)
+
+  if (isDevEnv()) {
+    console.log("Mode: 🛠️  DEVELOPMENT")
+  } else if (isTestEnv()) {
+    console.log("Mode: 🧪 TESTING")
+  } else {
+    console.log("Mode: 🌍 PRODUCTION")
+  }
 })
 
 
@@ -9,31 +22,10 @@ app.listen(3300, () => {
 
 
 
-
-
-
-
-
-
-
-
-// Import the validated env from your file (let's assume it's named env.js)
-// import { env, isDev } from './env.js'; 
-
-// console.log("--- ROBOT STARTING UP ---");
-
-// if (isDev()) {
-//   console.log("Mode: 🛠️  DEVELOPMENT");
-// } else {
-//   console.log("Mode: 🚀 PRODUCTION");
-// }
-
-// console.log(`The server is listening on Port: ${env.PORT}`);
 // console.log(`Database Location: ${env.DATABASE_URL}`);
 
 // // This proves Zod turned the string "3000" into a real number
 // console.log(`Port Type: ${typeof env.PORT}`);
-
 
 // "scripts": {
 //     "dev": "cross-env APP_STAGE=dev node --watch src/index.ts",

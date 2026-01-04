@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "node --watch src/index.ts",
+    "dev": "nodemon",
+    "dev1": "node --watch src",
     "start": "node src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -32,6 +33,7 @@
     "helmet": "^7.1.0",
     "jose": "^6.0.12",
     "morgan": "^1.10.1",
+    "nodemon": "^3.1.11",
     "pg": "^8.16.3",
     "ts-node": "^10.9.2",
     "zod": "^4.0.17"
