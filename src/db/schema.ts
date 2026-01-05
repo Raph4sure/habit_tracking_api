@@ -118,11 +118,7 @@ export type NewUser = typeof users.$inferInsert
 export type Habit = typeof habits.$inferSelect
 export type NewHabit = typeof habits.$inferInsert
 
-// Usage in functions
-const createUser = async (userData: NewUser): Promise<User> => {
-  const [user] = await db.insert(users).values(userData).returning()
-  return user
-}
+
 
 // Auto-generate Zod schemas from Drizzle tables
 export const insertUserSchema = createInsertSchema(users)
