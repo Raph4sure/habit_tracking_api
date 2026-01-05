@@ -11,7 +11,7 @@ app.listen(env.PORT, () => {
   if (isDevEnv()) {
     console.log("Mode: 🛠️  DEVELOPMENT")
   } else if (isTestEnv()) {
-    console.log("Mode: 🧪 TESTING")
+    console.log("Mode: 🚀 TESTING")
   } else {
     console.log("Mode: 🌍 PRODUCTION")
   }
@@ -22,6 +22,7 @@ app.listen(env.PORT, () => {
 
 
 
+// console.log(`The server is listening on Port: ${env.PORT}`);
 // console.log(`Database Location: ${env.DATABASE_URL}`);
 
 // // This proves Zod turned the string "3000" into a real number
