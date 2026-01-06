@@ -2,8 +2,15 @@ import type { Request, Response, NextFunction } from "express"
 import { verifyToken } from "../utils/jwt.ts"
 import type { JWTPayload } from "jose"
 
+// Custom payload interface with our user properties
+export interface UserPayload extends JWTPayload {
+  id: string
+  email: string
+  username: string
+}
+
 export interface AuthenticatedRequest extends Request {
-  user?: JWTPayload
+  user?: UserPayload
 }
 
 export const authenticateToken = async (

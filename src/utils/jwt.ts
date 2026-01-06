@@ -1,9 +1,7 @@
 import { jwtVerify, SignJWT, type JWTPayload } from "jose"
 import env from "../../env.ts"
 import { createSecretKey } from "crypto"
-
-
-
+import type { UserPayload } from "../middleware/auth.ts"
 
 export const generateToken = (payload: JWTPayload): Promise<string> => {
   const secret = env.JWT_SECRET
@@ -16,7 +14,7 @@ export const generateToken = (payload: JWTPayload): Promise<string> => {
     .sign(secretKey)
 }
 
-export const verifyToken = async (token: string): Promise<JWTPayload> => {
+export const verifyToken = async (token: string): Promise<UserPayload> => {
   const secretKey = createSecretKey(env.JWT_SECRET, "utf-8")
   const { payload } = await jwtVerify(token, secretKey)
 
