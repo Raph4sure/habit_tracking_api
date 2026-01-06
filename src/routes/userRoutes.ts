@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { z } from "zod"
 import { validateBody, validateParams } from "../middleware/validation.ts"
+import { authenticateToken } from "../middleware/auth.ts"
 
 const router = Router()
 
@@ -16,6 +17,9 @@ const UserIdSchema = z.object({
  
 })
 
+
+// Protecting all routes
+router.use(authenticateToken)
 
 router.get("/", (req, res) => {
   res.json({ message: "Get all users" })

@@ -1,6 +1,11 @@
 import { Router } from "express"
+import { authenticateToken } from "../middleware/auth.ts"
 
 const router = Router()
+
+
+// Protecting all routes
+router.use(authenticateToken)
 
 // Habit-specific routes
 router.get("/", (req, res) => {

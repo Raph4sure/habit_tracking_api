@@ -36,7 +36,7 @@ app.get("/health", (req, res) => {
 
 // Mounting Routes
 
-app.use("api/auth", authRoutes)
+app.use("/api/auth", authRoutes)
 app.use("/api/habits", hahabitRoutes)
 app.use("/api/users", userRoutes)
 
