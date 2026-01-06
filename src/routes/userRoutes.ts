@@ -1,37 +1,61 @@
 import { Router } from "express"
-import { z } from "zod"
-import { validateBody, validateParams } from "../middleware/validation.ts"
+import {
+  getProfile,
+  updateProfile,
+  changePassword,
+} from "../controllers/userController.ts"
 import { authenticateToken } from "../middleware/auth.ts"
+import { validateBody, validateParams } from "../middleware/validation.ts"
+import { z } from "zod"
 
 const router = Router()
 
-const createUserSchema = z.object({
-  name:z.string().min(2, 'Name is required'),
-  email: z.string().email('Invalid email format'),
-  password: z.string().min(8, 'Password must be at least 8 characters long')
-})
-
-
-const UserIdSchema = z.object({
-  id:z.string().uuid('Invalid user ID format'),
- 
-})
-
-
-// Protecting all routes
+// Apply authentication to all routes
 router.use(authenticateToken)
+
+// Validation schemas
+const updateProfileSchema = z.object({
+  email: z.string().email("Invalid email format").optional(),
+  username: z
+    .string()
+    .min(3, "Username must be at least 3 characters")
+    .max(50, "Username too long")
+    .optional(),
+  firstName: z.string().max(100).optional(),
+  lastName: z.string().max(100).optional(),
+})
+
+const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, "Current password is required"),
+  newPassword: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+      "Password must contain uppercase, lowercase, and number"
+    ),
+})
+
+
+
+
+
+// User profile routes
+router.get('/profile', getProfile)
+router.put('/profile', validateBody(updateProfileSchema), updateProfile)
+router.post('/change-password', validateBody(changePasswordSchema), changePassword)
 
 router.get("/", (req, res) => {
   res.json({ message: "Get all users" })
 })
 
-router.get("/:id", validateParams(UserIdSchema),  (req, res) => {
-  res.json({ message: `Get user ${req.params.id}` })
-})
+// router.get("/:id", validateParams(UserIdSchema), (req, res) => {
+//   res.json({ message: `Get user ${req.params.id}` })
+// })
 
-router.post("/", validateBody(createUserSchema), (req, res) => {
-  res.json({ message: "User created" })
-})
+// router.post("/", validateBody(createUserSchema), (req, res) => {
+//   res.json({ message: "User created" })
+// })
 
 router.put("/:id", (req, res) => {
   res.json({ message: `Update user ${req.params.id}` })
