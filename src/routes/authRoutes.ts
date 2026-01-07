@@ -4,6 +4,15 @@ import { insertUserSchema } from "../db/schema.ts"
 import { login, register } from "../controllers/authController.ts"
 import { z } from "zod"
 
+
+
+const registerSchema = z.object({
+  username: z.string().nonempty(),
+  email: z.email().nonempty(),
+  password: z.string().min(8).nonempty()
+})
+
+
 const router = Router()
 
 // Login validation schema
@@ -13,7 +22,7 @@ const loginSchema = z.object({
 })
 
 // Authentication routes
-router.post("/register", validateBody(insertUserSchema), register)
+router.post("/register", validateBody(registerSchema), register)
 
 router.post("/login", validateBody(loginSchema), login)
 

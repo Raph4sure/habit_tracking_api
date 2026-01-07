@@ -30,6 +30,14 @@ export const createHabit = async (req: AuthenticatedRequest, res: Response) => {
         }))
         await tx.insert(habitTags).values(habitTagValues)
       }
+
+      return newHabit
+    })
+
+    res.status(201).json({
+      message: "Habit created successfully",
+
+      habit: result,
     })
   } catch (error) {
     console.error("Create habit error:", error)
@@ -165,7 +173,10 @@ export const updateHabit = async (req: AuthenticatedRequest, res: Response) => {
   }
 }
 
-export const updateHabits = async (req: AuthenticatedRequest, res: Response) => {
+export const updateHabits = async (
+  req: AuthenticatedRequest,
+  res: Response
+) => {
   try {
     const { id } = req.params
     const userId = req.user!.id
@@ -213,7 +224,6 @@ export const updateHabits = async (req: AuthenticatedRequest, res: Response) => 
     res.status(500).json({ error: "Failed to update habit" })
   }
 }
-
 
 export const deleteHabit = async (req: AuthenticatedRequest, res: Response) => {
   try {

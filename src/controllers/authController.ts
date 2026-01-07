@@ -4,7 +4,10 @@ import db from "../db/connection.ts"
 import { generateToken } from "../utils/jwt.ts"
 import { comparePassword, hashedPassword as hashingPassword } from "../utils/password.ts"
 import { eq } from "drizzle-orm"
+import z from "zod"
 // import { generateToken } from "../utils/jwt.ts";
+
+
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -40,7 +43,7 @@ export const register = async (req: Request, res: Response) => {
     })
 
     res.status(201).json({
-      message: "User Created Succesfully",
+      message: "User Created Successfully",
       user: newUser,
       token,
     })
@@ -76,7 +79,7 @@ export const login = async (req: Request, res: Response) => {
     })
 
     // Step 4: Return user data and token
-    return res.status(201).json({
+    return res.status(200).json({
       message: "Login successful",
       user: {
         id: user.id,

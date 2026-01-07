@@ -42,17 +42,16 @@ const uuidSchema = z.object({
 // Habit-specific routes
 
 // CRUD Routes
-router.get('/', getUserHabits)
-router.get('/:id', validateParams(uuidSchema), getHabitById)
-router.post('/', validateBody(createHabitSchema), createHabit)
+router.get("/", getUserHabits)
+router.get("/:id", validateParams(uuidSchema), getHabitById)
+router.post("/", validateBody(createHabitSchema), createHabit)
 router.put(
-  '/:id',
+  "/:id",
   validateParams(uuidSchema),
   validateBody(updateHabitSchema),
   updateHabit
 )
-router.delete('/:id', validateParams(uuidSchema), deleteHabit)
-
+router.delete("/:id", validateParams(uuidSchema), deleteHabit)
 
 router.get("/", (req, res) => {
   res.json({ message: "Get all habits" })
