@@ -76,7 +76,7 @@ export const login = async (req: Request, res: Response) => {
     })
 
     // Step 4: Return user data and token
-    res.json({
+    return res.status(201).json({
       message: "Login successful",
       user: {
         id: user.id,
@@ -84,6 +84,7 @@ export const login = async (req: Request, res: Response) => {
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
+        createdAt: user.createdAt,
       },
       token,
     })
