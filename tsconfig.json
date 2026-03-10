@@ -8,6 +8,7 @@
     "verbatimModuleSyntax": true,
     "allowImportingTsExtensions": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "types": ["vitest/globals"]
   }
 }
