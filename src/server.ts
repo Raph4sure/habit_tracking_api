@@ -1,7 +1,7 @@
 import { env, isDevEnv, isTestEnv } from "../env.ts"
 import express from "express"
 import cors from "cors"
-import * as helmet from "helmet"
+import { default as helmet } from "helmet"
 import authRoutes from "./routes/authRoutes.ts"
 import userRoutes from "./routes/userRoutes.ts"
 import hahabitRoutes from "./routes/habitRoutes.ts"
@@ -41,13 +41,11 @@ app.use("/api/auth", authRoutes)
 app.use("/api/habits", hahabitRoutes)
 app.use("/api/users", userRoutes)
 
-
 // 404 handler - MUST come after all valid routes
 app.use(notFound)
 
 // Global error handler - MUST be last
 app.use(errorHandler)
-
 
 export { app }
 export default app
