@@ -1,0 +1,8 @@
+coverage
+.git
+.github
+.vscode
+tests
+README.md
+vitest.config.ts
+schedule.txt
