@@ -1,7 +1,7 @@
 import { env, isDevEnv, isTestEnv } from "../env.ts"
 import express from "express"
 import cors from "cors"
-import helmet from "helmet"
+import * as helmet from "helmet"
 import authRoutes from "./routes/authRoutes.ts"
 import userRoutes from "./routes/userRoutes.ts"
 import hahabitRoutes from "./routes/habitRoutes.ts"
